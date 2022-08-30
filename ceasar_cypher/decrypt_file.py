@@ -1,6 +1,6 @@
 from ceasar_cypher.ceasar import decryptMessageWithCeasarMethod
 
-def decryptFileCeasars() -> str:
+def decryptFileCeasars():
 
     # Leer archivo
     with open('documents/cipher1.txt', 'r') as file:

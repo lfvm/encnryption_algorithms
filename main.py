@@ -9,7 +9,8 @@ Fernando Valdeón
 from ceasar_cypher.ceasar import *
 from vigenere.vigenere import *
 from one_time_pad.one_time_pad import *
-from ceasar_cypher.decrypt_file import decryptFileCeasars 
+from ceasar_cypher.decrypt_file import * 
+from vigenere.decrypt_file import * 
 
 
 # Menú
@@ -36,7 +37,7 @@ while option != 0:
   elif option == 4:
     decryptFileCeasars()
   elif option == 5:
-    print("Cifrado del Cesar")
+    decryptFileVigenere()
   elif option == 0:
     continue
   else:
@@ -44,22 +45,3 @@ while option != 0:
     continue
 
   input("\nEnter to continue")
-
-# print("VIGENERE CYPHER")
-# key = 'abct lpety'
-# print(f"Orginal message: {message}")
-# encryptedCode = encryptMessageWithVigenereMethod(key, message)
-# print(f"Encripted message: {encryptedCode}")
-# decryptedMessage = decryptMessageWithVigenereMethod(key, encryptedCode)
-# print(f"Decrypted message: {decryptedMessage}")
-# print("__________________________________________________________________________")
-
-# print("\n")
-# print("Plain text of encrypted file 1: ")
-# decryptFileCeasars()
-# print("__________________________________________________________________________")
-
-
-# print("\n")
-# print("One time Pad ")
-# print(oneTimePad("hola mundo"))
