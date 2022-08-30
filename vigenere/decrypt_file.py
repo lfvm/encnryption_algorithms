@@ -1,63 +1,51 @@
+from vigenere import *
 
+def decryptFileVigenere() -> str:
 
-
-def decryptFileCeasars() -> str:
-
-    groupsOfwords = []
+    # Leer archivo
     with open('../documents/cipher2.txt', 'r') as file:
         data = file.read().rstrip()
 
-    #crear una lista de listas con grupos de 4 letras
-    counter = 0 
-    group = ""
-    for letter in data:
+    # Crear una lista de listas con grupos de 4 letras
+    groupsOf4Letters = []
+    n = 4
+    for index in range(0, len(data), n):
+        groupsOf4Letters.append(data[index : index + n])
 
-        if counter == 4:
-            groupsOfwords.append(group)
-            counter = 0
-            group = ""
-        else :
-            counter +=1 
-            group += letter
+    # Crear 4 diccionarios para contar la repetición de letras en cada índice
+    counters = [{}, {}, {}, {}]
 
-            
+    # Por cada grupo de 4 letras
+    for group in groupsOf4Letters:
 
+        # Por cada índice del 0 al 3
+        for i in range(len(group)):
 
-    dict1 = {}
-    dict2 = {}
-    dict3 = {}
-    dict4 = {}
-
-    for group in groupsOfwords:
-        
-        if group[0] in dict1:
-
-            dict1[group[0]] += 1  
-        else:
-            dict1[group[0]] = 1
+            # Contar la repetición de caracteres en cada índice
+            if group[i] in counters[i]:
+                counters[i][group[i]] += 1
+            else:
+                counters[i][group[i]] = 1
 
 
-        if group[1] in dict2:
+    # Obtener las letras que más se repitieron en los 4 índices
+    mostRepeatedEncryptedLetters = []
+    for i in range(4):
+        maxValue = max(counters[i].values())
 
-            dict2[group[1]] += 1  
-        else:
-            dict2[group[1]] = 1   
-
-            
-        if group[2] in dict3:
-
-            dict3[group[2]] += 1  
-        else:
-            dict3[group[2]] = 1
+        for letter, amount in counters[i].items():
+            if amount == maxValue:
+                mostRepeatedEncryptedLetters.append(letter)
 
 
-        if group[3] in dict4:
-
-            dict4[group[3]] += 1  
-        else:
-            dict4[group[3]] = 1
-
-    
+    '''
+    Tenemos la letra que más se repite de cada índice. Sabemos que las letras que más se repiten en
+    el Inglés son: " ", e, t y a. Por lo tanto podemos intuír que las letras que más se repitieron 
+    en cada índice deben de representar algúna de esas letras.
+    '''
 
 
-decryptFileCeasars()
+    print(mostRepeatedEncryptedLetters)
+
+
+decryptFileVigenere()
